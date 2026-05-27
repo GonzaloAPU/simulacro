@@ -1,0 +1,95 @@
+<p>f1-races works!</p>
+
+<div>
+  <label>
+    <input type="number" [(ngModel)]="anioBusqueda" >
+  </label>
+</div>
+
+<button (click)="getApiRaces()" >get api</button>
+
+
+
+<section>
+  <div class="table-responsive" *ngIf="listaResults.length > 0">
+
+    <table class="table table-striped table-bordered align-middle">
+
+      <thead class="table-dark">
+        <tr>
+          <th>Race ID</th>
+          <th>Carrera (race)</th>
+          <th>Sesiones (seasons)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let carrera of listaResults">
+          <td>
+            {{ carrera.race_id }}
+          </td>
+          <td>
+            <strong>{{ carrera.name}}</strong>
+          </td>
+          <td>
+
+            <div *ngFor="let sessions of carrera.sessions">
+              <button class="btn btn-sm btn-outline-info" (click)="getapisessions(sessions.id)"
+                data-bs-toggle="modal" data-bs-target="#ventanaModal">
+                Posiciones
+              </button>
+              <button class="btn btn-sm btn-outline-info" (click)="getapiconstructores(anioBusqueda)">
+                PRI/ULT
+              </button>
+
+            </div>
+
+            <div *ngIf="listaConstructores.length > 0">
+                <div class="list-group">
+                  <h2>Primero {{pri}}</h2>
+                  <h2>Ultimo {{ult}}</h2>
+                </div>
+
+              </div>
+
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</section>
+
+<div class="modal fade" id="ventanaModal" tabindex="-1" aria-labelledby="ventanaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+          <div class="container mt-5" *ngIf="listaSessions.length > 0; else sinPilotos">
+                  <h3 class="fw-bold text-primary mb-3">📋 Modelos Disponibles</h3>
+                  <div class="list-group">
+                    <div class="list-group-item list-group-item-action" *ngFor="let session of listaSessions">
+                      {{ session.name }}
+                      {{session.position}}
+                    </div>
+                  </div>
+          </div>
+
+            <ng-template #sinPilotos>
+              <div class="container mt-3 text-center py-4">
+                <div class="alert alert-warning border-warning" role="alert">
+                  <h4 class="alert-heading fw-bold">⚠️ Sin información</h4>
+                  <p class="mb-0 small text-dark">
+                    Esta sesión no registra datos de pilotos disponibles en la API por el momento.
+                  </p>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm mt-2" data-bs-dismiss="modal">
+                  Entendido / Cerrar
+                </button>
+              </div>
+            </ng-template>
+
+
+
+    </div>
+  </div>
+</div>

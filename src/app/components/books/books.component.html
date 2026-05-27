@@ -1,0 +1,67 @@
+<p>books works!</p>
+<input type="number">
+
+<div class="mb-3">
+  <label for="mes" class="form-label small opacity-75">Seleccioná el Mes:</label>
+  <select id="mes" name="mesBusqueda" class="form-select" [(ngModel)]="mes" style="max-width: 200px;">
+    <option value="1">Enero</option>
+    <option value="2">Febrero</option>
+    <option value="3">Marzo</option>
+    <option value="4">Abril</option>
+    <option value="5">Mayo</option>
+    <option value="6">Junio</option>
+    <option value="7">Julio</option>
+    <option value="8">Agosto</option>
+    <option value="9">Septiembre</option>
+    <option value="10">Octubre</option>
+    <option value="11">Noviembre</option>
+    <option value="12">Diciembre</option>
+  </select>
+</div>
+
+<div class="mb-3">
+  <label for="anio" class="form-label small opacity-75">Ingresá el Año:</label>
+  <input
+    type="number"
+    id="anio"
+    name="anioBusqueda"
+    class="form-control"
+    [(ngModel)]="anio"
+    placeholder="Ej: 2026"
+    style="max-width: 200px;"
+  >
+</div>
+
+<button (click)="getApiBooks()" class="btn btn-primary">Consultar</button>
+
+<table class="table table-striped table-bordered align-middle">
+
+      <thead class="table-dark">
+        <tr>
+          <th>Posicion (position)</th>
+          <th>Titulo del libro (title)</th>
+          <th>Portada del libro (image)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let booksrank of listabooks">
+          <td>
+            {{ booksrank.position}}
+          </td>
+          <td>
+            <strong>{{booksrank.name}}</strong>
+          </td>
+          <td>
+            <div class="me-3">
+              <img
+              [src]="booksrank.cover"
+              class="img-fluid rounded"
+              style="max-width: 80px; height: auto; object-fit: cover;"
+              >
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
