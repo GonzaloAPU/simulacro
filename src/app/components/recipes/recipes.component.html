@@ -44,23 +44,45 @@
 
           </td>
           <td>
-            <div *ngFor="let steps of recipesrank.steps">
-              {{steps[0]}}
-
-            </div>
-
-          </td>
-          <td>
-            <div class="me-3">
-              <img
+            <div class="text-center">
+            <img
               [src]="recipesrank.image"
-              class="img-fluid rounded"
+              referrerpolicy="no-referrer"
+              (error)="$any($event.target).src = 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=150&auto=format&fit=crop'"
+              class="img-fluid rounded shadow-sm"
               style="max-width: 80px; height: auto; object-fit: cover;"
-              >
-            </div>
+              alt="Receta"
+            >
+          </div>
           </td>
 
         </tr>
       </tbody>
 
-    </table>
+</table>
+
+
+<div class="modal fade" id="modalTraductor" tabindex="-1" aria-labelledby="modalTraductorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white"> <div class="modal-header border-secondary">
+        <h5 class="modal-title fw-bold text-warning" id="modalTraductorLabel">
+          🌎 Traducción de la Receta
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body py-4">
+        <p class="fs-6 lh-base">
+          {{ textoTraducido }}
+        </p>
+      </div>
+
+      <div class="modal-footer border-secondary">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
