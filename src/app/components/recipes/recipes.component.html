@@ -1,5 +1,3 @@
-<p>recipes works!</p>
-
 <div class="mb-3">
   <label for="anio" class="form-label small opacity-75">Ingresá el Año:</label>
   <input
@@ -22,9 +20,10 @@
         <tr>
           <th>Name</th>
           <th>Description</th>
-          <th>Ingredientes</th>
-          <th>Imagen</th>
-          <th>Detalle</th>
+          <th>Ingredients</th>
+          <th>Image</th>
+          <th>Steps</th>
+          <th>Traducir</th>
         </tr>
       </thead>
 
@@ -39,9 +38,7 @@
           <td>
             <div *ngFor="let ingredientes of recipesrank.ingredients">
               {{ingredientes.name}}
-
             </div>
-
           </td>
           <td>
             <div class="text-center">
@@ -55,7 +52,22 @@
             >
           </div>
           </td>
-
+          <td>
+            <div *ngFor="let steps of recipesrank.steps">
+              {{steps}}
+            </div>
+          </td>
+          <td>
+            <div>
+              <button type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#modalTraductor"
+                (click)="obtenerTraductor(traducido=recipesrank.description)">
+                Traducir
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
 
@@ -73,7 +85,7 @@
 
       <div class="modal-body py-4">
         <p class="fs-6 lh-base">
-          {{ textoTraducido }}
+          {{ traducido }}
         </p>
       </div>
 

@@ -16,8 +16,7 @@ export class RecipesComponent {
   name:string = 'pizza';
   tags:string = 'keto';
   listarecipes : any[] = [];
-  textoTraducido: any;
-
+  traducido:any;
 
 
   getApiRecipes(){
@@ -32,11 +31,14 @@ export class RecipesComponent {
     )
   }
 
-  obtenerTraductor(){
-    this.ApirecipesService.getApiTraductor(this.textoTraducido).subscribe(
-      (data) => {
-        this.textoTraducido = data;
-        console.log(data);
+  obtenerTraductor(textoTraducido:any){
+    this.ApirecipesService.getApiTraductor(textoTraducido).subscribe(
+      (data: any) => {
+        this.traducido = data.data.translations.translatedText[0];
+        /*console.log(data);
+        console.log(textoTraducido);*/
+        console.log(this.traducido);
+
       },
       (error) => {
         console.log(error);
