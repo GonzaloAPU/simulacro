@@ -51,6 +51,10 @@
           </td>
           <td>
             <strong>{{booksrank.name}}</strong>
+            <button (click)="getbookinfo(booksrank.book_id)" class="btn btn-info"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modalInfo">INFO</button>
           </td>
           <td>
             <div class="me-3">
@@ -65,3 +69,35 @@
       </tbody>
 
     </table>
+
+  <div class="modal fade" id="modalInfo" tabindex="-1" aria-labelledby="modalInfoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white"> <div class="modal-header border-secondary">
+        <h5 class="modal-title fw-bold text-warning" id="modalInfoLabel">
+          🌎 Información del Libro
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body py-4">
+        <p class="fs-6 lh-base" [innerHTML]="bookinfo?.synopsis">
+
+        </p>
+      </div>
+
+      <div class="modal-body py-4" *ngFor="let info of bookinfo?.authors">
+        <p class="fs-6 lh-base">
+          Autores: {{info}}
+        </p>
+      </div>
+
+      <div class="modal-footer border-secondary">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

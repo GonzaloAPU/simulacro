@@ -11,51 +11,36 @@
   >
 </div>
 
-<button (click)="getApiRecipes()" class="btn btn-primary">Consultar</button>
+<button (click)="buscarVideo()" class="btn btn-primary">Consultar</button>
 
 
 <table class="table table-striped table-bordered align-middle">
 
       <thead class="table-dark">
         <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Ingredients</th>
-          <th>Image</th>
-          <th>Steps</th>
-          <th>Traducir</th>
+          <th>ID del Video</th>
+          <th>Titulo</th>
+          <th>Enlace del Video</th>
+          <th>Canal</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let recipesrank of listarecipes">
+        <tr *ngFor="let listaV of listaVideos">
           <td>
-            {{ recipesrank.name}}
+            {{listaV.video.videoId}}
           </td>
           <td>
-            {{recipesrank.description}}
+            {{listaV.video.title}}
           </td>
           <td>
-            <div *ngFor="let ingredientes of recipesrank.ingredients">
-              {{ingredientes.name}}
-            </div>
+            {{listaV.video.descriptionSnippet}}
           </td>
           <td>
-            <div class="text-center">
-            <img
-              [src]="recipesrank.image"
-              referrerpolicy="no-referrer"
-              (error)="$any($event.target).src = 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=150&auto=format&fit=crop'"
-              class="img-fluid rounded shadow-sm"
-              style="max-width: 80px; height: auto; object-fit: cover;"
-              alt="Receta"
-            >
-          </div>
+
           </td>
           <td>
-            <div *ngFor="let steps of recipesrank.steps">
-              {{steps}}
-            </div>
+
           </td>
           <td>
             <div>
@@ -63,7 +48,7 @@
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTraductor"
-                (click)="obtenerTraductor(traducido=recipesrank.description)">
+                >
                 Traducir
               </button>
             </div>
@@ -85,7 +70,7 @@
 
       <div class="modal-body py-4">
         <p class="fs-6 lh-base">
-          {{ traducido }}
+
         </p>
       </div>
 

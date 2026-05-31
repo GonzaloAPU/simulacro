@@ -17,6 +17,9 @@ export class BooksComponent {
   anio:number = 2023;
   mes:number = 1;
   listabooks : any[] = [];
+  bookinfo : any={};
+
+
 
 
 
@@ -25,6 +28,19 @@ export class BooksComponent {
       (data) => {
         this.listabooks = data;
         console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  getbookinfo(idbook:number){
+    this.ApiBooksService.getApiInformation(idbook).subscribe(
+      (data:any) => {
+        console.log(data);
+        this.bookinfo = data;
+        console.log(this.bookinfo);
       },
       (error) => {
         console.log(error);
