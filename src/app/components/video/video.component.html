@@ -1,76 +1,85 @@
 <div class="mb-3">
-  <label for="anio" class="form-label small opacity-75">Busque recetas:</label>
+  <label for="cancion" class="form-label small opacity-75">Busque canciones:</label>
   <input
     type="text"
-    id="anio"
-    name="recipe"
+    id="cancion"
+    name="canciones"
     class="form-control"
     [(ngModel)]="name"
-    placeholder="Pizza"
+    placeholder="Despacito"
     style="max-width: 200px;"
   >
 </div>
 
 <button (click)="buscarVideo()" class="btn btn-primary">Consultar</button>
 
+<div class="table-responsive">
+  <table class="table table-striped table-bordered align-middle">
 
-<table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID del Video</th>
+            <th>Titulo</th>
+            <th>Enlace del Video</th>
+            <th>Canal</th>
+          </tr>
+        </thead>
 
-      <thead class="table-dark">
-        <tr>
-          <th>ID del Video</th>
-          <th>Titulo</th>
-          <th>Enlace del Video</th>
-          <th>Canal</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let listaV of listaVideos">
-          <td>
-            {{listaV.video.videoId}}
-          </td>
-          <td>
-            {{listaV.video.title}}
-          </td>
-          <td>
-            {{listaV.video.descriptionSnippet}}
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-          <td>
-            <div>
+        <tbody>
+          <tr *ngFor="let listaV of listaVideos">
+            <td>
               <button type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#modalTraductor"
-                >
-                Traducir
+                data-bs-target="#modalinfo"
+                (click)="mostrarInfo(listaV.video.descriptionSnippet)">
+                {{listaV.video.videoId}}
               </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
+            </td>
+            <td>
+              {{listaV.video.title}}
+            </td>
+            <td>
+                <a
+                  [href]="'https://www.youtube.com/watch?v=' + listaV.video.videoId"
+                  target="_blank"
+                  class="btn btn-danger btn-sm fw-bold"
+                >
+                  🎬 Ver Video
+                </a>
+            </td>
+            <td>
+              <div class="me-3">
+                {{listaV.video.author.title}}
+              </div>
+              <div class="me-3">
+                <img
+                [src]="listaV.video.author.avatar[0].url"
+                class="img-fluid rounded"
+                style="max-width: 80px; height: auto; object-fit: cover;"
+                >
+              </div>
+            </td>
 
-</table>
+          </tr>
+        </tbody>
+
+  </table>
+</div>
 
 
-<div class="modal fade" id="modalTraductor" tabindex="-1" aria-labelledby="modalTraductorLabel" aria-hidden="true">
+<div class="modal fade" id="modalinfo" tabindex="-1" aria-labelledby="modalInfoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-dark text-white"> <div class="modal-header border-secondary">
-        <h5 class="modal-title fw-bold text-warning" id="modalTraductorLabel">
-          🌎 Traducción de la Receta
+        <h5 class="modal-title fw-bold text-warning" id="modalInfoLabel">
+          🌎 Informacion del video
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body py-4">
         <p class="fs-6 lh-base">
-
+          {{info}}
         </p>
       </div>
 

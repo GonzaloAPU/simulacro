@@ -14,6 +14,7 @@ export class VideoComponent {
   constructor(private apivideoService: ApivideoService) {}
   listaVideos:any[]=[]
   name:string='';
+  info:string='';
 
   buscarVideo(){
     this.apivideoService.getVideo(this.name).subscribe(
@@ -26,6 +27,10 @@ export class VideoComponent {
         console.log(error);
       }
     )
+  }
+  mostrarInfo(info:string){
+    this.info = info;
+    console.log(this.info);
   }
 
 }

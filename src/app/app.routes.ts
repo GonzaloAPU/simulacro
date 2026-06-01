@@ -3,6 +3,7 @@ import {F1RacesComponent} from './components/f1-races/f1-races.component'
 import {BooksComponent} from './components/books/books.component'
 import {RecipesComponent} from './components/recipes/recipes.component'
 import {VideoComponent} from './components/video/video.component'
+import {SimulacroComponent} from './components/simulacro/simulacro.component'
 
 
 
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: '',
     component: RecipesComponent
+  },
+  {
+    path: 'simulacro',
+    component: SimulacroComponent
   },
   {
     path: 'f1-races',

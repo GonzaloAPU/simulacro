@@ -1,70 +1,58 @@
 <div class="mb-3">
-  <label for="plato" class="form-label small opacity-75">Busque recetas:</label>
+  <label for="lugar" class="form-label small opacity-75">Busque recetas:</label>
   <input
     type="text"
-    id="plato"
-    name="recipe"
+    id="lugar"
+    name="lugar"
     class="form-control"
     [(ngModel)]="name"
-    placeholder="Pizza"
+    placeholder="Jujuy"
     style="max-width: 200px;"
   >
 </div>
 
-<button (click)="getApiRecipes()" class="btn btn-primary">Consultar</button>
-
+<button (click)="buscarHoteles()" class="btn btn-primary">Consultar</button>
 
 <table class="table table-striped table-bordered align-middle">
 
       <thead class="table-dark">
         <tr>
           <th>Name</th>
-          <th>Description</th>
-          <th>Ingredients</th>
-          <th>Image</th>
-          <th>Steps</th>
-          <th>Traducir</th>
+          <th>Dueño</th>
+          <th>Latitud-Longitud</th>
+          <th>Detalle</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let recipesrank of listarecipes">
+        <tr *ngFor="let hoteles of listaHoteles" >
           <td>
-            {{ recipesrank.name}}
+            {{ hoteles.name}}
           </td>
           <td>
-            {{recipesrank.description}}
+            {{hoteles.owner_name}}
           </td>
+
           <td>
-            <div *ngFor="let ingredientes of recipesrank.ingredients">
-              {{ingredientes.name}}
-            </div>
-          </td>
-          <td>
-            <div class="text-center">
-            <img
-              [src]="recipesrank.image"
-              referrerpolicy="no-referrer"
-              (error)="$any($event.target).src = 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=150&auto=format&fit=crop'"
-              class="img-fluid rounded shadow-sm"
-              style="max-width: 80px; height: auto; object-fit: cover;"
-              alt="Receta"
+            <a
+              [href]="'https://www.google.com/maps/search/?api=1&query=' + hoteles.latitude + ',' + hoteles.longitude"
+              target="_blank"
+              class="text-info text-decoration-underline fw-medium"
             >
-          </div>
+              {{ hoteles.latitude }} , {{ hoteles.longitude }}
+            </a>
           </td>
-          <td>
-            <div *ngFor="let steps of recipesrank.steps">
-              {{steps}}
-            </div>
-          </td>
+
           <td>
             <div>
               <button type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTraductor"
-                (click)="obtenerTraductor(traducido=recipesrank.description)">
-                Traducir
+                (click)="getDetails(hoteles.business_id)"
+
+                >
+                Detalles
               </button>
             </div>
           </td>
@@ -84,9 +72,14 @@
       </div>
 
       <div class="modal-body py-4">
-        <p class="fs-6 lh-base">
-          {{ traducido }}
-        </p>
+          {{parametros[0]?.about?.summary}}
+          <div *ngFor="let foto of parametros[0]?.photos_sample">
+          <img
+              [src]="foto.photo_url"
+              alt="Receta"
+            >
+          </div>
+
       </div>
 
       <div class="modal-footer border-secondary">
