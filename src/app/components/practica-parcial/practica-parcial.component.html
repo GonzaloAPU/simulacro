@@ -1,3 +1,5 @@
+<p>practica-parcial works!</p>
+
 <div class="mb-3">
   <label for="lugar" class="form-label small opacity-75">Busque recetas:</label>
   <input
@@ -5,52 +7,51 @@
     id="lugar"
     name="lugar"
     class="form-control"
-    [(ngModel)]="name"
+    [(ngModel)]="receta"
     placeholder="Jujuy"
     style="max-width: 200px;"
   >
 </div>
 
-<button (click)="buscarHoteles()" class="btn btn-primary">Consultar</button>
+<button (click)="buscarRecetas(receta)" class="btn btn-primary">Consultar</button>
 
 <table class="table table-striped table-bordered align-middle">
 
       <thead class="table-dark">
         <tr>
           <th>Name</th>
-          <th>Dueño</th>
-          <th>Latitud-Longitud</th>
-          <th>Detalle</th>
+          <th>Description</th>
+          <th>Ingredients</th>
+          <th>image</th>
+          <th>Details</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let hoteles of listaHoteles" >
+        <tr *ngFor="let recetas of listaRecetas" >
           <td>
-            {{ hoteles.name}}
+            {{ recetas.name}}
           </td>
           <td>
-            {{hoteles.owner_name}}
+            {{recetas.description}}
           </td>
 
+          <td >
+            <div *ngFor="let i of recetas.ingredients">
+              {{i.name}}
+            </div>
+          </td>
           <td>
-            <a
-
-              [href]="'https://www.google.com/maps?q=' + hoteles.latitude + ',' + hoteles.longitude"
-              target="_blank"
-              class="text-info text-decoration-underline fw-medium"
-            >
-              {{ hoteles.latitude }} , {{ hoteles.longitude }}
-            </a>
+            <img referrerpolicy="no-referrer"
+            [src]="recetas.image" alt="Imagen de {{ recetas.name }}" style="max-width: 100px;">
           </td>
-
           <td>
             <div>
               <button type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTraductor"
-                (click)="getDetails(hoteles.business_id)"
+                (click)="traducirReceta(recetas.description)"
 
                 >
                 Detalles
@@ -62,7 +63,6 @@
 
 </table>
 
-
 <div class="modal fade" id="modalTraductor" tabindex="-1" aria-labelledby="modalTraductorLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-dark text-white"> <div class="modal-header border-secondary">
@@ -73,14 +73,7 @@
       </div>
 
       <div class="modal-body py-4">
-          {{parametros[0]?.about?.summary}}
-          <div *ngFor="let foto of parametros[0]?.photos_sample">
-          <img
-              [src]="foto.photo_url"
-              alt="Receta"
-            >
-          </div>
-
+        <p>{{ traduccion }}</p>
       </div>
 
       <div class="modal-footer border-secondary">
