@@ -1,0 +1,124 @@
+
+<div class="container mt-4">
+  <div class="card bg-dark text-white p-4 shadow" style="max-width: 500px; margin: 0 auto;">
+    <h3 class="text-warning h5 fw-bold mb-3 border-bottom border-secondary pb-2">
+      📝 Formulario de Registro
+    </h3>
+
+    <form>
+      <div class="mb-3">
+        <label for="campoTexto" class="form-label small opacity-75">Nombre / Criterio:</label>
+        <input
+          type="text"
+          id="campoTexto"
+          name="campoTexto"
+          class="form-control"
+          [(ngModel)]="codigo"
+          placeholder="Escribí acá..."
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="campoNumero" class="form-label small opacity-75">Número / Año / Cantidad:</label>
+        <input
+          type="number"
+          id="campoNumero"
+          name="campoNumero"
+          class="form-control"
+          [(ngModel)]="anio"
+          placeholder="Ej: 2026"
+        >
+      </div>
+
+      <div class="d-flex gap-2 pt-2">
+        <button type="button" class="btn btn-secondary w-50 fw-bold" (click)="buscarPais()">
+          Paises
+        </button>
+
+        <button type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+            data-bs-target="#modalTraductor"
+            (click)="buscarDetalles()"
+        >
+          consultarInfo
+          </button>
+
+        <button type="button" class="btn btn-warning w-50 fw-bold" (click)="buscarDetalles()">
+          Detalles
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div>
+
+</div>
+
+<table class="table table-striped table-bordered align-middle">
+
+      <thead class="table-dark">
+        <tr>
+          <th>date</th>
+          <th>localname</th>
+          <th>countrycode</th>
+          <th>type</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let fiestas of listapais" >
+          <td>
+            {{ fiestas.date}}
+          </td>
+          <td>
+            {{fiestas.localName}}
+          </td>
+
+          <td>
+            {{ fiestas.countryCode }}
+          </td>
+
+          <td>
+            <div *ngFor="let t of fiestas.types">
+              {{ t }}
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+
+</table>
+
+<div class="modal fade" id="modalTraductor" tabindex="-1" aria-labelledby="modalTraductorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white"> <div class="modal-header border-secondary">
+        <h5 class="modal-title fw-bold text-warning" id="modalTraductorLabel">
+          🌎 Info
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body py-4">
+          {{ listadetalles.data.capital}}
+          {{ listadetalles.data.currencyCodes[0]}}
+           <img
+            style="width: 100px; height: auto; margin-top: 20px;"
+              [src]="listadetalles.data.flagImageUri"
+              alt="bandera"
+            >
+      </div>
+
+      <div class="modal-footer border-secondary">
+        <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

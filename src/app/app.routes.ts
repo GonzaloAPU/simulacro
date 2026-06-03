@@ -5,6 +5,8 @@ import {RecipesComponent} from './components/recipes/recipes.component'
 import {VideoComponent} from './components/video/video.component'
 import {SimulacroComponent} from './components/simulacro/simulacro.component'
 import { PracticaParcialComponent } from './components/practica-parcial/practica-parcial.component';
+import {RecuperatorioComponent} from './components/recuperatorio/recuperatorio.component'
+
 
 
 
@@ -21,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'practicaParcial',
     component: PracticaParcialComponent
+  },
+  {
+    path: 'recuperatorio',
+    component: RecuperatorioComponent
   },
   {
     path: 'simulacro',
